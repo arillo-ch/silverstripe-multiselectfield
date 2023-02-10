@@ -11,7 +11,7 @@
         "manytomany",
         "multselectfield"
     ],
-    "homepage": "https://github.com/kinglozzer/silverstripe-multiselectfield",
+    "homepage": "https://github.com/arillo-ch/silverstripe-multiselectfield",
     "authors": [
         {
             "name": "Arillo Team",
@@ -19,7 +19,7 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/kinglozzer/silverstripe-multiselectfield/issues"
+        "issues": "https://github.com/arillo-ch/silverstripe-multiselectfield/issues"
     },
     "require": {
         "silverstripe/vendor-plugin": "^1.0",
@@ -34,7 +34,7 @@
         }
     },
     "extra": {
-        "installer-name": "multiselectfield",
+        "installer-name": "silverstripe-multiselectfield",
         "expose": [
             "client"
         ]

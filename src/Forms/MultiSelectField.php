@@ -275,10 +275,10 @@ class MultiSelectField extends ListboxField
     public function Field($properties = [])
     {
         Requirements::css(
-            'kinglozzer/multiselectfield: client/css/multiselectfield.css'
+            'arillo/silverstripe-multiselectfield: client/css/multiselectfield.css'
         );
         Requirements::javascript(
-            'kinglozzer/multiselectfield: client/javascript/dist/multiselectfield.js'
+            'arillo/silverstripe-multiselectfield: client/javascript/dist/multiselectfield.js'
         );
 
         return parent::Field($properties);
