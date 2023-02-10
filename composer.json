@@ -1,0 +1,44 @@
+{
+    "name": "arillo/silverstripe-multiselectfield",
+    "type": "silverstripe-vendormodule",
+    "description": "A sortable multiple select field for managing many-to-many relations",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "silverstripe",
+        "multiselect",
+        "field",
+        "manymany",
+        "manytomany",
+        "multselectfield"
+    ],
+    "homepage": "https://github.com/kinglozzer/silverstripe-multiselectfield",
+    "authors": [
+        {
+            "name": "Arillo Team",
+            "email": "hello@arillo.ch"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/kinglozzer/silverstripe-multiselectfield/issues"
+    },
+    "require": {
+        "silverstripe/vendor-plugin": "^1.0",
+        "silverstripe/framework": "^4.12"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arillo\\MultiSelectField\\": "src/"
+        }
+    },
+    "extra": {
+        "installer-name": "multiselectfield",
+        "expose": [
+            "client"
+        ]
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
