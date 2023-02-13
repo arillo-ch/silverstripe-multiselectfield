@@ -4,71 +4,59 @@ export default (config) => ({
   ...config,
 
   init() {
-    // this.prepareOptions();
     this.restoreEventListeners();
     this.initLists();
   },
 
-  // prepareOptions() {
-  //   this.optionsLeft = this.options.filter((item) => !item.Selected);
-  //   this.optionsRight = this.options.filter((item) => item.Selected);
-  // },
-
   initLists() {
-    const opts = {
-      group: 'shared',
+    if (!this.sortable) return;
+    this.sortable = Sortable.create(this.$refs.sortable, {
       animation: 150,
       dataIdAttr: 'data-id',
       handle: '.multiselectfield-item-title',
-
-      onEnd: (e) => {
-        const itemsLeft = this.left.toArray().map((val) => {
-          const opt = this.options.find(
-            (option) => option.Value === parseInt(val)
-          );
-          opt.Selected = false;
-          return opt;
-        });
-        const itemsRight = this.right.toArray().map((val) => {
-          const opt = this.options.find(
-            (option) => option.Value === parseInt(val)
-          );
-          opt.Selected = true;
-          return opt;
-        });
-
-        // this.destroyLists();
-        this.$nextTick(() => {
-          this.options = [...itemsRight, ...itemsLeft];
-          // this.initLists();
-        });
+      onUpdate: ({ oldIndex, newIndex }) => {
+        this.options = this.updateArr([...this.options], oldIndex, newIndex);
       },
-    };
-
-    this.$nextTick(() => {
-      this.left = Sortable.create(this.$refs.left, { ...opts, sort: false });
-      this.right = Sortable.create(this.$refs.right, opts);
     });
   },
 
-  move(val) {
-    this.options = this.options.map((option) => {
-      if (option.Value === val) {
-        option.Selected = !option.Selected;
-      }
-      return option;
-    });
-    this.destroyLists();
-    // this.prepareOptions();
-
-    this.$nextTick(() => {
-      this.initLists();
-    });
+  updateArr(arr, from, to) {
+    const item = this.options[from];
+    arr = [...arr.slice(0, from), ...arr.slice(from + 1)];
+    arr = [...arr.slice(0, to), item, ...arr.slice(to)];
+    return arr;
   },
 
-  destroyLists() {
-    this.left.destroy();
-    this.right.destroy();
+  getType(val) {
+    const option = this.options.find((opt) => opt.Value === val);
+    return option.Selected;
+  },
+
+  sortList(list) {
+    Array.from(list.getElementsByTagName('LI'))
+      .sort((a, b) => a.dataset.title.localeCompare(b.dataset.title))
+      .forEach((li) => list.appendChild(li));
+  },
+
+  move(e) {
+    const { target } = e;
+    const val = parseInt(target.dataset.value);
+    const item = target.parentNode;
+    const list = item.parentNode;
+
+    const isGonnaBeSortable = list === this.$refs.list;
+
+    if (isGonnaBeSortable) {
+      this.$refs.sortable.append(item);
+      if (!this.sortable) this.sortList(this.$refs.sortable);
+    } else {
+      this.$refs.list.append(item);
+      this.sortList(this.$refs.list);
+    }
+    const option = this.options.find((opt) => opt.Value === val);
+    option.Selected = isGonnaBeSortable;
+
+    // @TODO add sorting for options
   },
 
   restoreEventListeners() {

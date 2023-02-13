@@ -40,13 +40,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: default;
 }
 
-.multiselectfield-item-title-left {
-  cursor: ew-resize;
-}
-
-.multiselectfield-item-title-right {
+.multiselectfield-item-title-sortable {
   cursor: move;
 }
 

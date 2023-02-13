@@ -5127,51 +5127,46 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       this.initLists();
     },
     initLists() {
-      const opts = {
-        group: "shared",
+      if (!this.sortable)
+        return;
+      this.sortable = sortable_esm_default.create(this.$refs.sortable, {
         animation: 150,
         dataIdAttr: "data-id",
         handle: ".multiselectfield-item-title",
-        onEnd: (e) => {
-          const itemsLeft = this.left.toArray().map((val) => {
-            const opt = this.options.find(
-              (option2) => option2.Value === parseInt(val)
-            );
-            opt.Selected = false;
-            return opt;
-          });
-          const itemsRight = this.right.toArray().map((val) => {
-            const opt = this.options.find(
-              (option2) => option2.Value === parseInt(val)
-            );
-            opt.Selected = true;
-            return opt;
-          });
-          this.$nextTick(() => {
-            this.options = [...itemsRight, ...itemsLeft];
-          });
+        onUpdate: ({ oldIndex: oldIndex2, newIndex: newIndex2 }) => {
+          this.options = this.updateArr([...this.options], oldIndex2, newIndex2);
         }
-      };
-      this.$nextTick(() => {
-        this.left = sortable_esm_default.create(this.$refs.left, { ...opts, sort: false });
-        this.right = sortable_esm_default.create(this.$refs.right, opts);
       });
     },
-    move(val) {
-      this.options = this.options.map((option2) => {
-        if (option2.Value === val) {
-          option2.Selected = !option2.Selected;
-        }
-        return option2;
-      });
-      this.destroyLists();
-      this.$nextTick(() => {
-        this.initLists();
-      });
+    updateArr(arr, from, to) {
+      const item = this.options[from];
+      arr = [...arr.slice(0, from), ...arr.slice(from + 1)];
+      arr = [...arr.slice(0, to), item, ...arr.slice(to)];
+      return arr;
     },
-    destroyLists() {
-      this.left.destroy();
-      this.right.destroy();
+    getType(val) {
+      const option2 = this.options.find((opt) => opt.Value === val);
+      return option2.Selected;
+    },
+    sortList(list) {
+      Array.from(list.getElementsByTagName("LI")).sort((a, b) => a.dataset.title.localeCompare(b.dataset.title)).forEach((li) => list.appendChild(li));
+    },
+    move(e) {
+      const { target } = e;
+      const val = parseInt(target.dataset.value);
+      const item = target.parentNode;
+      const list = item.parentNode;
+      const isGonnaBeSortable = list === this.$refs.list;
+      if (isGonnaBeSortable) {
+        this.$refs.sortable.append(item);
+        if (!this.sortable)
+          this.sortList(this.$refs.sortable);
+      } else {
+        this.$refs.list.append(item);
+        this.sortList(this.$refs.list);
+      }
+      const option2 = this.options.find((opt) => opt.Value === val);
+      option2.Selected = isGonnaBeSortable;
     },
     restoreEventListeners() {
       if (!window._restoredListeners) {
