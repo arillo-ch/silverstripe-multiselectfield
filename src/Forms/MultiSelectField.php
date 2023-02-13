@@ -260,12 +260,26 @@ class MultiSelectField extends ListboxField
 
         // Disable changetracking (we handle that manually) and chosen
         $attributes['class'] .= ' no-change-track multiselectfield no-chosen';
-        $attributes['data-searchable'] = $this->getSearchable();
-        $attributes['data-sortable'] = (bool) $this->getSort();
-        $attributes['data-min-height'] = $this->getMinHeight();
-        $attributes['data-max-height'] = $this->getMaxHeight();
+        // $attributes['x-model'] = 'options';
+
+        // $attributes['data-searchable'] = $this->getSearchable();
+        // $attributes['data-sortable'] = (bool) $this->getSort();
+        // $attributes['data-min-height'] = $this->getMinHeight();
+        // $attributes['data-max-height'] = $this->getMaxHeight();
 
         return $attributes;
+    }
+
+    public function getJsOptions()
+    {
+        $options = [
+            'options' => $this->Options->toNestedArray(),
+            'searchable' => $this->getSearchable(),
+            'sortable' => (bool) $this->getSort(),
+            'maxHeight' => $this->getMaxHeight(),
+        ];
+
+        return json_encode($options);
     }
 
     /**
@@ -277,9 +291,14 @@ class MultiSelectField extends ListboxField
         Requirements::css(
             'arillo/silverstripe-multiselectfield: client/css/multiselectfield.css'
         );
+        // Requirements::javascript(
+        //     'arillo/silverstripe-multiselectfield: client/javascript/dist/sortable.js'
+        // );
         Requirements::javascript(
             'arillo/silverstripe-multiselectfield: client/javascript/dist/multiselectfield.js'
         );
+
+        // Requirements::block('silverstripe/admin: client/dist/js/vendor.js');
 
         return parent::Field($properties);
     }

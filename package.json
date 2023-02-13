@@ -7,7 +7,7 @@
     "url": "git@gitlab.com:arillo/dev/ss-boilerplate.git"
   },
   "scripts": {
-    "dev": "esbuild client/javascript/multiselectfield.js --bundle --outdir=client/javascript/dist --watch"
+    "dev": "esbuild client/javascript/multiselectfield.js --sourcemap --bundle --outdir=client/javascript/dist --watch"
   },
   "license": "MIT",
   "devDependencies": {

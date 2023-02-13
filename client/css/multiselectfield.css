@@ -1,82 +1,64 @@
-.ui-multiselect {
-    width: 100% !important;
-    overflow: hidden;
-    border-color: #b3b3b3;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px;
+.multiselectfield-cols {
+  display: flex;
+  background: #fff;
+  padding: 4px;
+  border: 1px solid #ced5e1;
+  border-radius: 0.23em;
+  margin-top: 40px;
 }
 
-.ui-multiselect div.available,
-.ui-multiselect div.selected {
-    width: 50% !important;
-    border: 0;
+.multiselectfield-list {
+  width: 50%;
+  list-style: none;
+  margin: 0;
+  max-heigth: 500px;
+  overflow: auto;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.ui-multiselect .connected-list li {
-    overflow: hidden;
-    height: 28px;
-    margin: 0;
-    padding: 4px 20px 4px 5px;
-    background: #ffffff;
-    font-size: 13px;
-    line-break: 28px;
+.multiselectfield-item {
+  border: 1px solid #e3e4e5;
+  background: #fafbfc;
+  display: flex;
+  transition: background-color 400ms;
 }
 
-
-.ui-multiselect .connected-list li a.action {
-    top: 0; bottom: 0;
-    width: 15px;
+.multiselectfield-item.sortable-ghost {
+  background: #fff6b2;
 }
 
-.ui-multiselect .connected-list li a.action .ui-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+.multiselectfield-item.sortable-drag {
+  background: #c8ebfb;
 }
 
-.ui-multiselect .connected-list.ui-sortable li {
-    padding-left: 20px;
+.multiselectfield-item-title {
+  padding: 5px 8px;
+  flex: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.ui-multiselect .connected-list li:nth-child(odd) {
-    background: #f0f4f7;
+.multiselectfield-item-title-left {
+  cursor: ew-resize;
 }
 
-.ui-multiselect .connected-list li:hover {
-    background: #fffad6;
+.multiselectfield-item-title-right {
+  cursor: move;
 }
 
-.ui-multiselect .connected-list li .ui-icon-arrowthick-2-n-s {
-    cursor: move;
-}
-
-.ui-multiselect .connected-list li .ui-icon-minus {
-    cursor: pointer;
-}
-
-.ui-multiselect .count {
-    padding: .3846rem .7692rem;
-}
-
-.ui-multiselect .ui-widget-header {
-    padding: 10px;
-    font-size: inherit;
-}
-
-.ui-multiselect .ui-widget-header a {
-    margin: 0;
-    padding: .3846rem .7692rem;
-    color: #fff;
-}
-
-.ui-multiselect input.search {
-    width: 65%;
-    height: auto;
-    padding: .3846rem .7692rem;
-    margin: 0;
-    border: 1px solid #b3b3b3;
-    color: #566b8d;
+.multiselectfield-item-action {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+  width: 30px;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px !important;
+  color: #43536d;
 }
