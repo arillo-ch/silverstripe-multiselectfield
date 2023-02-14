@@ -1,2 +1,2 @@
 mappings:
-  MultiSelectField: Kinglozzer\MultiSelectField\Forms\MultiSelectField
+  MultiSelectField: Arillo\MultiSelectField\MultiSelectField
