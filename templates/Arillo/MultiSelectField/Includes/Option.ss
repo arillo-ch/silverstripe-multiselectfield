@@ -21,6 +21,6 @@
     @click="move"
     type="button"
   >
-    <span class="sr-only" x-text="getSelected($Value) ? `<%t MultiSelectField.RemoveItem 'Remove item' %>`: `<%t MultiSelectField.AddItem 'Add item' %>`"></span>
+    <span class="sr-only" x-text="getSelected($Value) ? `<%t Arillo\MultiSelectField.RemoveItem 'Remove item' %>`: `<%t Arillo\MultiSelectField.AddItem 'Add item' %>`"></span>
   </button>
 </li>

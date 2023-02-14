@@ -12,7 +12,7 @@
         <input
           type="text"
           class="multiselectfield-search-input"
-          placeholder="<%t MultiSelectField.Search 'Search' %>"
+          placeholder="<%t Arillo\MultiSelectField.Search 'Search' %>"
           x-model="searchTerm"
         >
         <button
@@ -27,7 +27,7 @@
         <span class="font-icon-search multiselectfield-search-icon" :class="searchTerm && 'is-hidden'"></span>
       </div>
       <div class="multiselectfield-count">
-        <span x-text="`${count} <%t MultiSelectField.ItemsSelected 'items selected' %>`"></span>
+        <span x-text="`${count} <%t Arillo\MultiSelectField.ItemsSelected 'items selected' %>`"></span>
       </div>
     </div>
     <div class="multiselectfield-lists">
@@ -54,14 +54,14 @@
         type="button"
         @click="addAll"
       >
-        <%t MultiSelectField.AddAll 'Add all' %>
+        <%t Arillo\MultiSelectField.AddAll 'Add all' %>
       </button>
       <button
         class="multiselectfield-action btn btn-danger font-icon-minus"
         type="button"
         @click="removeAll"
       >
-        <%t MultiSelectField.RemoveAll 'Remove all' %>
+        <%t Arillo\MultiSelectField.RemoveAll 'Remove all' %>
       </button>
     </div>
   </div>
