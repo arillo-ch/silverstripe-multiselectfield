@@ -3,6 +3,7 @@
   data-title="$Title"
   data-value="$Value"
   data-disabled="$Disabled"
+  data-pos="$Pos(0)"
   x-data="{title: '$Title', visible: true, value: $Value}"
   x-effect="updateItem"
   :class="searchTerm && !visible && 'is-hidden'"

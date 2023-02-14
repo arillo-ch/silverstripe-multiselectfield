@@ -28,9 +28,9 @@ class MultiSelectField extends ListboxField
     protected $maxHeight = 300;
 
     /**
-     * @var bool
+     * @var string
      */
-    protected $sort = false;
+    protected $sort = null;
 
     // /**
     //  * @var bool
@@ -49,7 +49,7 @@ class MultiSelectField extends ListboxField
         $name,
         $title,
         DataObjectInterface $object,
-        $sort = false,
+        string $sort,
         $source = null,
         $titleField = 'Title'
     ) {
@@ -67,9 +67,8 @@ class MultiSelectField extends ListboxField
             $this->dataClass = $class;
 
             // Sort the items
-            if ($this->getSort()) {
-                $dataSource = $dataSource->sort($this->getSort());
-            }
+
+            $dataSource = $dataSource->sort($this->getSort());
 
             // If we're dealing with an UnsavedRelationList, it'll be empty, so we
             // can skip this and just use an array of all available items
@@ -152,7 +151,6 @@ class MultiSelectField extends ListboxField
     public function setSort($sort)
     {
         $this->sort = $sort;
-
         return $this;
     }
 
@@ -189,41 +187,37 @@ class MultiSelectField extends ListboxField
      */
     public function saveInto(DataObjectInterface $record)
     {
-        if ($sortField = $this->getSort()) {
-            // If we're sorting, we'll add items to the ManyManyList manually
-            $name = $this->name;
-            $list = $record->$name();
-            $class = $this->dataClass;
+        $sortField = $this->getSort();
+        // If we're sorting, we'll add items to the ManyManyList manually
+        $name = $this->name;
+        $list = $record->$name();
+        $class = $this->dataClass;
 
-            // Clear the list, we're rebuilding it from scratch
-            $list->removeAll();
+        // Clear the list, we're rebuilding it from scratch
+        $list->removeAll();
 
-            // If nothing's been added, that's all we need to do
-            if (empty($this->value)) {
-                return;
-            }
+        // If nothing's been added, that's all we need to do
+        if (empty($this->value)) {
+            return;
+        }
 
-            // Get our selected items
-            $selectedList = $class
-                ::get()
-                ->byIDs(array_values($this->value))
-                ->toArray();
+        // Get our selected items
+        $selectedList = $class
+            ::get()
+            ->byIDs(array_values($this->value))
+            ->toArray();
 
-            // Convert our selected items to an ID => Object associative array
-            $selected = [];
-            foreach ($selectedList as $item) {
-                $selected[$item->ID] = $item;
-            }
+        // Convert our selected items to an ID => Object associative array
+        $selected = [];
+        foreach ($selectedList as $item) {
+            $selected[$item->ID] = $item;
+        }
 
-            // Now loop through the selected items (as these are in the correct order) and populate the list
-            foreach ($this->value as $order => $id) {
-                $item = $selected[$id];
+        // Now loop through the selected items (as these are in the correct order) and populate the list
+        foreach ($this->value as $order => $id) {
+            $item = $selected[$id];
 
-                $list->add($item, [$sortField => $order]);
-            }
-        } else {
-            // If we're not sorting, ListboxField can handle saving the items
-            parent::saveInto($record);
+            $list->add($item, [$sortField => $order]);
         }
     }
 
@@ -244,8 +238,6 @@ class MultiSelectField extends ListboxField
     {
         $options = [
             'options' => $this->Options->toNestedArray(),
-            // 'searchable' => $this->getSearchable(),
-            'sortable' => (bool) $this->getSort(),
             'maxHeight' => $this->getMaxHeight(),
         ];
 
@@ -261,14 +253,9 @@ class MultiSelectField extends ListboxField
         Requirements::css(
             'arillo/silverstripe-multiselectfield: client/css/multiselectfield.css'
         );
-        // Requirements::javascript(
-        //     'arillo/silverstripe-multiselectfield: client/javascript/dist/sortable.js'
-        // );
         Requirements::javascript(
             'arillo/silverstripe-multiselectfield: client/javascript/dist/multiselectfield.js'
         );
-
-        // Requirements::block('silverstripe/admin: client/dist/js/vendor.js');
 
         return parent::Field($properties);
     }

@@ -115,13 +115,15 @@ select.multiselectfield {
   padding: 8px 4px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   position: relative;
 }
 
 .multiselectfield-item {
   border: 1px solid #e3e4e5;
   background: #fafbfc;
+  /* border: 1px solid #ced5e1; */
+  /* background: #f1f3f6; */
   display: flex;
   transition: background-color 400ms;
 }

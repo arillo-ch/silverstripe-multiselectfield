@@ -5126,7 +5126,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     searchTerm: "",
     init() {
       this.restoreEventListeners();
-      this.initLists();
+      this.initSortable();
       this.updateCount(this.options);
       this.$watch("options", this.updateCount.bind(this));
     },
@@ -5136,9 +5136,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         return acc;
       }, 0);
     },
-    initLists() {
-      if (!this.sortable)
-        return;
+    initSortable() {
       this.sortable = sortable_esm_default.create(this.$refs.sortable, {
         animation: 150,
         dataIdAttr: "data-id",
@@ -5166,8 +5164,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const isGonnaBeSortable = list === this.$refs.list;
       if (isGonnaBeSortable) {
         this.$refs.sortable.append(item);
-        if (!this.sortable)
-          this.sortList(this.$refs.sortable);
       } else {
         this.$refs.list.append(item);
         this.sortList(this.$refs.list);
@@ -5182,7 +5178,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     },
     sortList(list) {
-      Array.from(list.getElementsByTagName("LI")).sort((a, b) => a.dataset.title.localeCompare(b.dataset.title)).forEach((li) => list.appendChild(li));
+      Array.from(list.getElementsByTagName("LI")).sort((a, b) => parseInt(a.dataset.pos) - parseInt(b.dataset.pos)).forEach((li) => list.appendChild(li));
     },
     dataFromDom(list, Selected = false) {
       return Array.from(list.getElementsByTagName("LI")).map((item) => ({
@@ -5201,6 +5197,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     },
     removeAll() {
       this.$refs.list.append(...this.$refs.sortable.childNodes);
+      this.sortList(this.$refs.list);
       this.options = this.options.map((option2) => ({
         ...option2,
         Selected: false

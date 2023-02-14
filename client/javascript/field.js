@@ -7,7 +7,7 @@ export default (config) => ({
 
   init() {
     this.restoreEventListeners();
-    this.initLists();
+    this.initSortable();
     this.updateCount(this.options);
     this.$watch('options', this.updateCount.bind(this));
   },
@@ -20,8 +20,7 @@ export default (config) => ({
   },
 
   // Sortable
-  initLists() {
-    if (!this.sortable) return;
+  initSortable() {
     this.sortable = Sortable.create(this.$refs.sortable, {
       animation: 150,
       dataIdAttr: 'data-id',
@@ -56,7 +55,6 @@ export default (config) => ({
 
     if (isGonnaBeSortable) {
       this.$refs.sortable.append(item);
-      if (!this.sortable) this.sortList(this.$refs.sortable);
     } else {
       this.$refs.list.append(item);
       this.sortList(this.$refs.list);
@@ -74,7 +72,7 @@ export default (config) => ({
 
   sortList(list) {
     Array.from(list.getElementsByTagName('LI'))
-      .sort((a, b) => a.dataset.title.localeCompare(b.dataset.title))
+      .sort((a, b) => parseInt(a.dataset.pos) - parseInt(b.dataset.pos))
       .forEach((li) => list.appendChild(li));
   },
 
@@ -97,6 +95,7 @@ export default (config) => ({
 
   removeAll() {
     this.$refs.list.append(...this.$refs.sortable.childNodes);
+    this.sortList(this.$refs.list);
     this.options = this.options.map((option) => ({
       ...option,
       Selected: false,
