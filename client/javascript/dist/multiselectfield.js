@@ -5122,9 +5122,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // client/javascript/field.js
   var field_default = (config) => ({
     ...config,
+    count: 0,
+    searchTerm: "",
     init() {
       this.restoreEventListeners();
       this.initLists();
+      this.updateCount(this.options);
+      this.$watch("options", this.updateCount.bind(this));
+    },
+    updateCount(options) {
+      this.count = options.reduce((acc, option2) => {
+        acc = option2.Selected ? acc + 1 : acc;
+        return acc;
+      }, 0);
     },
     initLists() {
       if (!this.sortable)
@@ -5134,30 +5144,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         dataIdAttr: "data-id",
         handle: ".multiselectfield-item-title",
         onUpdate: ({ oldIndex: oldIndex2, newIndex: newIndex2 }) => {
-          this.options = this.updateArr([...this.options], oldIndex2, newIndex2);
+          this.options = this.onUpdate([...this.options], oldIndex2, newIndex2);
         }
       });
     },
-    updateArr(arr, from, to) {
+    onUpdate(arr, from, to) {
       const item = this.options[from];
       arr = [...arr.slice(0, from), ...arr.slice(from + 1)];
       arr = [...arr.slice(0, to), item, ...arr.slice(to)];
       return arr;
     },
-    getType(val) {
+    getSelected(val) {
       const option2 = this.options.find((opt) => opt.Value === val);
       return option2.Selected;
-    },
-    sortList(list) {
-      Array.from(list.getElementsByTagName("LI")).sort((a, b) => a.dataset.title.localeCompare(b.dataset.title)).forEach((li) => list.appendChild(li));
-    },
-    dataFromDom(list, Selected = false) {
-      return Array.from(list.getElementsByTagName("LI")).map((item) => ({
-        Value: parseInt(item.dataset.value),
-        Title: item.dataset.title,
-        Disabled: Boolean(item.dataset.disabled),
-        Selected
-      }));
     },
     move(e) {
       const { target } = e;
@@ -5182,6 +5181,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         ];
       });
     },
+    sortList(list) {
+      Array.from(list.getElementsByTagName("LI")).sort((a, b) => a.dataset.title.localeCompare(b.dataset.title)).forEach((li) => list.appendChild(li));
+    },
+    dataFromDom(list, Selected = false) {
+      return Array.from(list.getElementsByTagName("LI")).map((item) => ({
+        Value: parseInt(item.dataset.value),
+        Title: item.dataset.title,
+        Disabled: Boolean(item.dataset.disabled),
+        Selected
+      }));
+    },
+    addAll() {
+      this.$refs.sortable.append(...this.$refs.list.childNodes);
+      this.options = this.options.map((option2) => ({
+        ...option2,
+        Selected: true
+      }));
+    },
+    removeAll() {
+      this.$refs.list.append(...this.$refs.sortable.childNodes);
+      this.options = this.options.map((option2) => ({
+        ...option2,
+        Selected: false
+      }));
+    },
     restoreEventListeners() {
       if (!window._restoredListeners) {
         const iframe = document.createElement("iframe");
@@ -5191,15 +5215,28 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         window.EventTarget.prototype.removeEventListener = iframe.contentWindow.EventTarget.prototype.removeEventListener;
         window._restoredListeners = true;
       }
+    },
+    async updateItem() {
+      if (!this.searchTerm || this.getSelected(this.value)) {
+        this.visible = true;
+        return;
+      }
+      const pat = new RegExp(this.searchTerm, "i");
+      const visible = pat.test(this.title);
+      await this.$nextTick(() => {
+        this.visible = visible;
+      });
     }
   });
 
   // client/javascript/multiselectfield.js
-  if (typeof window.Alpine === "undefined") {
-    window.Alpine = module_default;
-  }
-  module_default.data("multiselectfield", field_default);
-  module_default.start();
+  (function($) {
+    if (typeof window.Alpine === "undefined") {
+      window.Alpine = module_default;
+    }
+    module_default.data("multiselectfield", field_default);
+    module_default.start();
+  })(window.jQuery);
 })();
 /**!
  * Sortable 1.15.0

@@ -25,22 +25,17 @@ class MultiSelectField extends ListboxField
     /**
      * @var int
      */
-    protected $minHeight = 300;
-
-    /**
-     * @var int
-     */
-    protected $maxHeight = 500;
+    protected $maxHeight = 300;
 
     /**
      * @var bool
      */
     protected $sort = false;
 
-    /**
-     * @var bool
-     */
-    protected $searchable = true;
+    // /**
+    //  * @var bool
+    //  */
+    // protected $searchable = true;
 
     /**
      * @param string $name
@@ -132,25 +127,6 @@ class MultiSelectField extends ListboxField
     }
 
     /**
-     * @param int $minHeight
-     * @return this
-     */
-    public function setMinHeight($minHeight)
-    {
-        $this->minHeight = $minHeight;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMinHeight()
-    {
-        return $this->minHeight;
-    }
-
-    /**
      * @param int $maxHeight
      * @return this
      */
@@ -188,24 +164,24 @@ class MultiSelectField extends ListboxField
         return $this->sort;
     }
 
-    /**
-     * @param boolean $bool
-     * @return this
-     */
-    public function setSearchable($bool)
-    {
-        $this->searchable = $bool;
+    // /**
+    //  * @param boolean $bool
+    //  * @return this
+    //  */
+    // public function setSearchable($bool)
+    // {
+    //     $this->searchable = $bool;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * @return boolean
-     */
-    public function getSearchable()
-    {
-        return $this->searchable;
-    }
+    // /**
+    //  * @return boolean
+    //  */
+    // public function getSearchable()
+    // {
+    //     return $this->searchable;
+    // }
 
     /**
      * @param DataObjectInterface $record
@@ -260,12 +236,6 @@ class MultiSelectField extends ListboxField
 
         // Disable changetracking (we handle that manually) and chosen
         $attributes['class'] .= ' no-change-track multiselectfield no-chosen';
-        // $attributes['x-model'] = 'options';
-
-        // $attributes['data-searchable'] = $this->getSearchable();
-        // $attributes['data-sortable'] = (bool) $this->getSort();
-        // $attributes['data-min-height'] = $this->getMinHeight();
-        // $attributes['data-max-height'] = $this->getMaxHeight();
 
         return $attributes;
     }
@@ -274,7 +244,7 @@ class MultiSelectField extends ListboxField
     {
         $options = [
             'options' => $this->Options->toNestedArray(),
-            'searchable' => $this->getSearchable(),
+            // 'searchable' => $this->getSearchable(),
             'sortable' => (bool) $this->getSort(),
             'maxHeight' => $this->getMaxHeight(),
         ];

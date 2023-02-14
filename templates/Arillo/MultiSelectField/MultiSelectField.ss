@@ -5,64 +5,66 @@
     </template>
   </select>
 
-  <div class="multiselectfield-cols">
-    <ul class="multiselectfield-list" x-ref="list">
-      <% loop $Options %>
-        <% if not $Selected %>
-          <li
-            class="multiselectfield-item"
-            data-title="$Title"
-            data-value="$Value"
-            data-disabled="$Disabled"
-          >
-            <div
-              class="multiselectfield-item-title"
-              :class="getType($Value) && sortable && 'multiselectfield-item-title-sortable'"
-            >
-              $Title
-            </div>
-            <button
-              class="multiselectfield-item-action"
-              :class="getType($Value) ? 'font-icon-minus' : 'font-icon-plus-1'"
-              @click="move"
-              data-value="$Value"
-            >
-              <span class="sr-only" x-text="getType($Value) ? `<%t MultiSelectField.RemoveItem 'Remove item' %>`: `<%t MultiSelectField.AddItem 'Add item' %>`"></span>
-            </button>
-          </li>
-        <% end_if %>
-      <% end_loop %>
-    </ul>
 
-    <ul class="multiselectfield-list" x-ref="sortable">
-      <% loop $Options %>
-        <% if $Selected %>
-          <li
-            class="multiselectfield-item"
-            data-title="$Title"
-            data-value="$Value"
-            data-disabled="$Disabled"
-          >
-            <div
-              class="multiselectfield-item-title"
-              :class="getType($Value) && sortable && 'multiselectfield-item-title-sortable'"
-            >
-              $Title
-            </div>
-            <button
-              class="multiselectfield-item-action"
-              :class="getType($Value) ? 'font-icon-minus' : 'font-icon-plus-1'"
-              @click="move"
-              data-value="$Value"
-            >
-              <span class="sr-only" x-text="getType($Value) ? `<%t MultiSelectField.RemoveItem 'Remove item' %>`: `<%t MultiSelectField.AddItem 'Add item' %>`"></span>
-            </button>
-          </li>
-        <% end_if %>
-      <% end_loop %>
-    </ul>
+  <div class="multiselectfield-field">
+    <div class="multiselectfield-header">
+      <div class="multiselectfield-search">
+        <input
+          type="text"
+          class="multiselectfield-search-input"
+          placeholder="<%t MultiSelectField.Search 'Search' %>"
+          x-model="searchTerm"
+        >
+        <button
+          type="button"
+          class="multiselectfield-search-clear"
+          :class="searchTerm && 'is-visible'"
+          @click="searchTerm = ''"
+        >
+          <span class="multiselectfield-search-clear-icon font-icon-cross-mark"></span>
+        </button>
+
+        <span class="font-icon-search multiselectfield-search-icon" :class="searchTerm && 'is-hidden'"></span>
+      </div>
+      <div class="multiselectfield-count">
+        <span x-text="`${count} <%t MultiSelectField.ItemsSelected 'items selected' %>`"></span>
+      </div>
+    </div>
+    <div class="multiselectfield-lists">
+      <ul class="multiselectfield-list" x-ref="list">
+        <% loop $Options %>
+          <% if not $Selected %>
+            <% include Arillo\MultiSelectField\Option %>
+          <% end_if %>
+        <% end_loop %>
+      </ul>
+
+      <ul class="multiselectfield-list" x-ref="sortable">
+        <% loop $Options %>
+          <% if $Selected %>
+            <% include Arillo\MultiSelectField\Option %>
+          <% end_if %>
+        <% end_loop %>
+      </ul>
+    </div>
+
+    <div class="multiselectfield-footer">
+      <button
+        class="multiselectfield-action btn btn-primary font-icon-plus-1"
+        type="button"
+        @click="addAll"
+      >
+        <%t MultiSelectField.AddAll 'Add all' %>
+      </button>
+      <button
+        class="multiselectfield-action btn btn-danger font-icon-minus"
+        type="button"
+        @click="removeAll"
+      >
+        <%t MultiSelectField.RemoveAll 'Remove all' %>
+      </button>
+    </div>
   </div>
-
 </div>
 
 
