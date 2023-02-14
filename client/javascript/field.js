@@ -38,6 +38,15 @@ export default (config) => ({
       .forEach((li) => list.appendChild(li));
   },
 
+  dataFromDom(list, Selected = false) {
+    return Array.from(list.getElementsByTagName('LI')).map((item) => ({
+      Value: parseInt(item.dataset.value),
+      Title: item.dataset.title,
+      Disabled: Boolean(item.dataset.disabled),
+      Selected,
+    }));
+  },
+
   move(e) {
     const { target } = e;
     const val = parseInt(target.dataset.value);
@@ -56,7 +65,12 @@ export default (config) => ({
     const option = this.options.find((opt) => opt.Value === val);
     option.Selected = isGonnaBeSortable;
 
-    // @TODO add sorting for options
+    this.$nextTick(() => {
+      this.options = [
+        ...this.dataFromDom(this.$refs.sortable, true),
+        ...this.dataFromDom(this.$refs.list),
+      ];
+    });
   },
 
   restoreEventListeners() {

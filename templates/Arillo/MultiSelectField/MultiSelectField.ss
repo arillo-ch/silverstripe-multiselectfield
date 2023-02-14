@@ -9,7 +9,12 @@
     <ul class="multiselectfield-list" x-ref="list">
       <% loop $Options %>
         <% if not $Selected %>
-          <li class="multiselectfield-item" data-title="$Title">
+          <li
+            class="multiselectfield-item"
+            data-title="$Title"
+            data-value="$Value"
+            data-disabled="$Disabled"
+          >
             <div
               class="multiselectfield-item-title"
               :class="getType($Value) && sortable && 'multiselectfield-item-title-sortable'"
@@ -32,7 +37,12 @@
     <ul class="multiselectfield-list" x-ref="sortable">
       <% loop $Options %>
         <% if $Selected %>
-          <li class="multiselectfield-item" data-title="$Title">
+          <li
+            class="multiselectfield-item"
+            data-title="$Title"
+            data-value="$Value"
+            data-disabled="$Disabled"
+          >
             <div
               class="multiselectfield-item-title"
               :class="getType($Value) && sortable && 'multiselectfield-item-title-sortable'"

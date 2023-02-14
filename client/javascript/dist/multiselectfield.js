@@ -5151,6 +5151,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     sortList(list) {
       Array.from(list.getElementsByTagName("LI")).sort((a, b) => a.dataset.title.localeCompare(b.dataset.title)).forEach((li) => list.appendChild(li));
     },
+    dataFromDom(list, Selected = false) {
+      return Array.from(list.getElementsByTagName("LI")).map((item) => ({
+        Value: parseInt(item.dataset.value),
+        Title: item.dataset.title,
+        Disabled: Boolean(item.dataset.disabled),
+        Selected
+      }));
+    },
     move(e) {
       const { target } = e;
       const val = parseInt(target.dataset.value);
@@ -5167,6 +5175,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       const option2 = this.options.find((opt) => opt.Value === val);
       option2.Selected = isGonnaBeSortable;
+      this.$nextTick(() => {
+        this.options = [
+          ...this.dataFromDom(this.$refs.sortable, true),
+          ...this.dataFromDom(this.$refs.list)
+        ];
+      });
     },
     restoreEventListeners() {
       if (!window._restoredListeners) {
