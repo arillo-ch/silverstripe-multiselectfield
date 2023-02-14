@@ -19,7 +19,6 @@
     class="multiselectfield-item-action"
     :class="getSelected($Value) ? 'font-icon-minus multiselectfield-item-action-remove' : 'font-icon-plus-1 multiselectfield-item-action-add'"
     @click="move"
-    data-value="$Value"
     type="button"
   >
     <span class="sr-only" x-text="getSelected($Value) ? `<%t MultiSelectField.RemoveItem 'Remove item' %>`: `<%t MultiSelectField.AddItem 'Add item' %>`"></span>

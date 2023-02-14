@@ -21,8 +21,28 @@ export default (config) => ({
 
   // Sortable
   initSortable() {
+    this.list = Sortable.create(this.$refs.list, {
+      animation: 150,
+      sort: false,
+      group: {
+        name: 'shared',
+        put: false,
+      },
+      dataIdAttr: 'data-id',
+      handle: '.multiselectfield-item-title',
+      onEnd: () => {
+        this.$nextTick(() => {
+          this.options = [
+            ...this.dataFromDom(this.$refs.sortable, true),
+            ...this.dataFromDom(this.$refs.list),
+          ];
+        });
+      },
+    });
+
     this.sortable = Sortable.create(this.$refs.sortable, {
       animation: 150,
+      group: 'shared',
       dataIdAttr: 'data-id',
       handle: '.multiselectfield-item-title',
       onUpdate: ({ oldIndex, newIndex }) => {
@@ -47,8 +67,8 @@ export default (config) => ({
   // Move item via click
   move(e) {
     const { target } = e;
-    const val = parseInt(target.dataset.value);
     const item = target.parentNode;
+    const val = parseInt(item.dataset.value);
     const list = item.parentNode;
 
     const isGonnaBeSortable = list === this.$refs.list;

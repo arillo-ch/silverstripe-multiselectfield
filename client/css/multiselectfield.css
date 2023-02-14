@@ -1,12 +1,12 @@
 select.multiselectfield {
   display: none;
+  margin-bottom: 40px;
 }
 
 .multiselectfield-field {
   background: #fff;
   border: 1px solid #ced5e1;
   border-radius: 0.23em;
-  /* padding: 8px 4px 0 4px; */
 }
 
 /* Header */
@@ -122,8 +122,6 @@ select.multiselectfield {
 .multiselectfield-item {
   border: 1px solid #e3e4e5;
   background: #fafbfc;
-  /* border: 1px solid #ced5e1; */
-  /* background: #f1f3f6; */
   display: flex;
   transition: background-color 400ms;
 }
@@ -146,7 +144,7 @@ select.multiselectfield {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  cursor: default;
+  cursor: e-resize;
   position: relative;
 }
 

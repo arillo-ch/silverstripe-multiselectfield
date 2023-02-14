@@ -1,13 +1,14 @@
 {
   "name": "silverstripe-multiselect",
-  "version": "2.0.3",
+  "version": "1.0.0",
   "description": "SilverStripe multiselect field",
   "repository": {
     "type": "git",
     "url": "git@gitlab.com:arillo/dev/ss-boilerplate.git"
   },
   "scripts": {
-    "dev": "esbuild client/javascript/multiselectfield.js --sourcemap --bundle --outdir=client/javascript/dist --watch"
+    "dev": "esbuild client/javascript/multiselectfield.js --sourcemap --bundle --outdir=client/javascript/dist --watch",
+    "build": "esbuild client/javascript/multiselectfield.js --bundle --minify --outdir=client/javascript/dist"
   },
   "license": "MIT",
   "devDependencies": {

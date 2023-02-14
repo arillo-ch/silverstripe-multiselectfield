@@ -1,16 +1,19 @@
 # MultiSelectField
-[![Build Status](https://travis-ci.org/kinglozzer/silverstripe-multiselectfield.png?branch=master)](https://travis-ci.org/kinglozzer/silverstripe-multiselectfield)
+
+[![Build Status](https://travis-ci.org/arillo-ch/silverstripe-multiselectfield.png?branch=master)](https://travis-ci.org/arillo-ch/silverstripe-multiselectfield)
 
 A drag & drop sortable select field for managing many-to-many relations.
 
-![field](images/field.png)
+Inspired by https://github.com/kinglozzer/silverstripe-multiselectfield wich breaks in SilverStripe `4.12+`
+
+<!-- ![field](images/field.png) -->
 
 ## Installation:
 
 ### Composer:
 
 ```bash
-$ composer require kinglozzer/multiselectfield:^2.0
+$ composer require arillo/silverstripe-multiselectfield
 ```
 
 ### Download:
@@ -19,12 +22,12 @@ Simply clone or download this repository and put it in a folder called 'multisel
 
 ### Example:
 
-The field currently only supports many-to-many relations. The constructor takes an optional argument for a field to sort on, which you need to define in your `$many_many_extraFields`.
+The field currently only supports many-to-many relations. The constructor requires an argument for a field to sort on, which you need to define in your `$many_many_extraFields`.
 
 The following is an example of how to use `MultiSelectField` in a simple many-to-many relationship with a "Sort" extra field:
 
 ```php
-use Kinglozzer\MultiSelectField\Forms\MultiSelectField;
+use Arillo\MultiSelectField\MultiSelectField;
 
 class Department extends DataObject
 {
@@ -39,7 +42,7 @@ class Department extends DataObject
     private static $many_many_extraFields = [
         'StaffMembers' => [
             'Sort' => 'Int',
-        ]
+        ],
     ];
 
     /**
@@ -49,7 +52,12 @@ class Department extends DataObject
     {
         $fields = FieldList::create();
 
-        $staffField = MultiSelectField::create('StaffMembers', 'Staff members', $this, 'Sort');
+        $staffField = MultiSelectField::create(
+            'StaffMembers',
+            'Staff members',
+            $this,
+            'Sort'
+        );
         $fields->addFieldToTab('Root.Main', $staffField);
 
         return $fields;
