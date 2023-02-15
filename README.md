@@ -1,7 +1,5 @@
 # MultiSelectField
 
-[![Build Status](https://travis-ci.org/arillo-ch/silverstripe-multiselectfield.png?branch=master)](https://travis-ci.org/arillo-ch/silverstripe-multiselectfield)
-
 A drag & drop sortable select field for managing many-to-many relations.
 
 Inspired by https://github.com/kinglozzer/silverstripe-multiselectfield wich breaks in SilverStripe `4.12+`
