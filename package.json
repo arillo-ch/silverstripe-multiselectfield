@@ -4,7 +4,7 @@
   "description": "SilverStripe multiselect field",
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:arillo/dev/ss-boilerplate.git"
+    "url": "git@github.com:arillo-ch/silverstripe-multiselectfield.git"
   },
   "scripts": {
     "dev": "esbuild client/javascript/multiselectfield.js --sourcemap --bundle --outdir=client/javascript/dist --watch",
