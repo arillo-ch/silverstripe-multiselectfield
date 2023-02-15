@@ -2,7 +2,7 @@
 
 A drag & drop sortable select field for managing many-to-many relations.
 
-Inspired by https://github.com/kinglozzer/silverstripe-multiselectfield wich breaks in SilverStripe `4.12+`
+Inspired by https://github.com/kinglozzer/silverstripe-multiselectfield which breaks in SilverStripe `4.12+`
 
 ![field](images/field.png)
 
