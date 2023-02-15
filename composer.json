@@ -9,7 +9,7 @@
         "field",
         "manymany",
         "manytomany",
-        "multselectfield"
+        "multiselectfield"
     ],
     "homepage": "https://github.com/arillo-ch/silverstripe-multiselectfield",
     "authors": [
