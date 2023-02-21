@@ -1,7 +1,7 @@
 de:
   Arillo\MultiSelectField:
     Search: 'Suchen'
-    ItemsSelected: 'elemente ausgewält'
+    ItemsSelected: 'Element(e) ausgewählt'
     AddAll: 'Alle hinzufügen'
     RemoveAll: 'Alle entfernen'
     RemoveItem: 'Element entfernen'
