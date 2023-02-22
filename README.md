@@ -48,7 +48,7 @@ class Department extends DataObject
      */
     public function getCMSFields()
     {
-        $fields = FieldList::create();
+        $fields = parent::getCMSFields();
 
         $staffField = MultiSelectField::create(
             'StaffMembers',

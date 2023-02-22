@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="multiselectfield-lists">
-      <ul class="multiselectfield-list" x-ref="list">
+      <ul class="multiselectfield-list" x-ref="list" :style="{maxHeight: `${maxHeight}px`}">
         <% loop $Options %>
           <% if not $Selected %>
             <% include Arillo\MultiSelectField\Option %>
@@ -39,7 +39,7 @@
         <% end_loop %>
       </ul>
 
-      <ul class="multiselectfield-list" x-ref="sortable">
+      <ul class="multiselectfield-list" x-ref="sortable" :style="{maxHeight: `${maxHeight}px`}">
         <% loop $Options %>
           <% if $Selected %>
             <% include Arillo\MultiSelectField\Option %>
