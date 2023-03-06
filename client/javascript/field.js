@@ -4,19 +4,26 @@ export default (config) => ({
   ...config,
   count: 0,
   searchTerm: '',
+  isFirst: true,
 
   init() {
+    this.$form = this.$refs.select.closest('form');
     this.restoreEventListeners();
     this.initSortable();
-    this.updateCount(this.options);
-    this.$watch('options', this.updateCount.bind(this));
+    this.update(this.options);
+    this.$watch('options', this.update.bind(this));
   },
 
-  updateCount(options) {
+  update(options) {
     this.count = options.reduce((acc, option) => {
       acc = option.Selected ? acc + 1 : acc;
       return acc;
     }, 0);
+
+    if (this.isFirst) this.isFirst = false;
+    if (!this.isFirst) {
+      this.$form.dispatchEvent(new CustomEvent('dirty'));
+    }
   },
 
   // Sortable

@@ -229,7 +229,8 @@ class MultiSelectField extends ListboxField
         $attributes = parent::getAttributes();
 
         // Disable changetracking (we handle that manually) and chosen
-        $attributes['class'] .= ' no-change-track multiselectfield no-chosen';
+        $attributes['class'] .= 'no-change-track multiselectfield no-chosen';
+        $attributes['x-ref'] = 'select';
 
         return $attributes;
     }
