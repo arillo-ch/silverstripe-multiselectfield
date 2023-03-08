@@ -152,7 +152,9 @@ export default (config) => ({
       return;
     }
 
-    const pat = new RegExp(this.searchTerm, 'i');
+    const escaped = this.searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    const pat = new RegExp(escaped, 'i');
     const visible = pat.test(this.title);
 
     await this.$nextTick(() => {
