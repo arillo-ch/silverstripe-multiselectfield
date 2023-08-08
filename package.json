@@ -15,7 +15,6 @@
     "esbuild": "^0.15.8"
   },
   "dependencies": {
-    "alpinejs": "^3.11.1",
     "sortablejs": "^1.15.0"
   }
 }

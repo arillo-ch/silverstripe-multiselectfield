@@ -1,10 +1,6 @@
-import Alpine from 'alpinejs';
 import field from './field';
 
-(function ($) {
-  if (typeof window.Alpine === 'undefined') {
-    window.Alpine = Alpine;
-  }
+document.addEventListener('alpine:init', () => {
+  // console.log('multiselectfield alpine:init');
   Alpine.data('multiselectfield', field);
-  Alpine.start();
-})(window.jQuery);
+});

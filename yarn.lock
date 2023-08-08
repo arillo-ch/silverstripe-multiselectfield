@@ -12,25 +12,6 @@
   resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.15.18.tgz#128b76ecb9be48b60cf5cfc1c63a4f00691a3239"
   integrity sha512-L4jVKS82XVhw2nvzLg/19ClLWg0y27ulRwuP7lcyL6AbUWB5aPglXY3M21mauDQMDfRLs8cQmeT03r/+X3cZYQ==
 
-"@vue/reactivity@~3.1.1":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.1.5.tgz#dbec4d9557f7c8f25c2635db1e23a78a729eb991"
-  integrity sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==
-  dependencies:
-    "@vue/shared" "3.1.5"
-
-"@vue/shared@3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.1.5.tgz#74ee3aad995d0a3996a6bb9533d4d280514ede03"
-  integrity sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==
-
-alpinejs@^3.11.1:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.11.1.tgz#8675083411bb8a18e618a646cd64cb9bdf76a75e"
-  integrity sha512-0Y+4WKQcEZrvpfS98qeSOXCPXFPorULQ+1hc8lQrx+1HHzkUofD4HzjTfz+wimA5tSsGnpXz/SoF2P9saiXZCw==
-  dependencies:
-    "@vue/reactivity" "~3.1.1"
-
 esbuild-android-64@0.15.18:
   version "0.15.18"
   resolved "https://registry.yarnpkg.com/esbuild-android-64/-/esbuild-android-64-0.15.18.tgz#20a7ae1416c8eaade917fb2453c1259302c637a5"
