@@ -1,6 +1,9 @@
+/* global Alpine */
 import field from './field';
 
+if (typeof Alpine !== 'undefined') {
+  Alpine.data('multiselectfield', field);
+}
 document.addEventListener('alpine:init', () => {
-  // console.log('multiselectfield alpine:init');
   Alpine.data('multiselectfield', field);
 });
