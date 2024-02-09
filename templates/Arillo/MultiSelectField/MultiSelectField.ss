@@ -5,7 +5,6 @@
     </template>
   </select>
 
-
   <div class="multiselectfield-field">
     <div class="multiselectfield-header">
       <div class="multiselectfield-search">
