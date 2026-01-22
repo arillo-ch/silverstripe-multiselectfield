@@ -22,16 +22,16 @@
         "issues": "https://github.com/arillo-ch/silverstripe-multiselectfield/issues"
     },
     "require": {
-        "silverstripe/vendor-plugin": "^1.0 | ^2.0",
-        "silverstripe/framework": "^4.0 | ^5.0",
-        "arillo/silverstripe-cms-alpine": "dev-main"
+        "silverstripe/vendor-plugin": "^2.0 || ^3.0",
+        "silverstripe/framework": "^5.0 || ^6.0",
+        "arillo/silverstripe-cms-alpine": "@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5 || ^11.0"
     },
     "autoload": {
         "psr-4": {
-            "Arillo\\MultiSelectField\\": "src/"
+            "Arillo\\MultiSelectField\\": "src/Forms/"
         }
     },
     "extra": {

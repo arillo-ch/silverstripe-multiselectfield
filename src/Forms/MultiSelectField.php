@@ -6,7 +6,7 @@ use SilverStripe\Forms\ListboxField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\ORM\UnsavedRelationList;
-use SilverStripe\ORM\ArrayLib;
+use SilverStripe\Core\ArrayLib;
 use SilverStripe\ORM\DataObjectInterface;
 use SilverStripe\View\Requirements;
 use SilverStripe\ORM\FieldType\DBHTMLText;
@@ -252,10 +252,10 @@ class MultiSelectField extends ListboxField
     public function Field($properties = [])
     {
         Requirements::css(
-            'arillo/silverstripe-multiselectfield: client/css/multiselectfield.css'
+            'arillo/silverstripe-multiselectfield:client/css/multiselectfield.css'
         );
         Requirements::javascript(
-            'arillo/silverstripe-multiselectfield: client/javascript/dist/multiselectfield.js'
+            'arillo/silverstripe-multiselectfield:client/javascript/dist/multiselectfield.js'
         );
 
         return parent::Field($properties);
