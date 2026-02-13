@@ -193,11 +193,18 @@ class MultiSelectField extends ListboxField
         $list = $record->$name();
         $class = $this->dataClass;
 
-        // Clear the list, we're rebuilding it from scratch
-        $list->removeAll();
+        // Clear the list
+        $currentIds = $list->column('ID');
+        if ($this->value) {
+            if ($oldIds = array_diff($currentIds, $this->value)) {
+                $list->removeMany($oldIds);
+            }
+        } elseif ($currentIds) {
+            $list->removeAll();
 
-        // If nothing's been added, that's all we need to do
-        if (empty($this->value)) {
+            return;
+        } else {
+            // If nothing's been added, that's all we need to do
             return;
         }
 
